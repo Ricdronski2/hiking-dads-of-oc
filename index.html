@@ -275,6 +275,52 @@
     border-color: var(--line-strong);
   }
 
+  .rsvp-block {
+    margin: 22px 0 4px;
+    text-align: center;
+  }
+
+  .rsvp-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: 100%;
+    padding: 15px 18px;
+    border-radius: 10px;
+    font-family: "Karla", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background: var(--forest);
+    color: var(--surface-raised);
+    box-shadow: var(--shadow);
+    transition: transform 0.12s ease, opacity 0.12s ease;
+    box-sizing: border-box;
+  }
+  :root[data-theme="dark"] .rsvp-cta,
+  :root:not([data-theme="light"]) .rsvp-cta { color: #0F1710; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .rsvp-cta { color: var(--surface-raised); } }
+  .rsvp-cta:hover { transform: translateY(-1px); }
+  .rsvp-cta:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+  .rsvp-cta svg { width: 20px; height: 20px; flex: none; }
+
+  .rsvp-cta.full {
+    background: var(--surface-raised);
+    color: var(--ink-faint) !important;
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .rsvp-status {
+    margin: 10px 0 0;
+    font-size: 13.5px;
+    color: var(--ink-faint);
+  }
+
   .section-head {
     text-align: center;
     margin-bottom: 24px;
@@ -442,6 +488,14 @@
         </span>
       </div>
 
+      <div class="rsvp-block">
+        <a class="rsvp-cta" id="rsvp-btn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+          <span class="rsvp-label">RSVP &middot; Join This Hike</span>
+        </a>
+        <p class="rsvp-status" id="rsvp-status">Loading spots&hellip;</p>
+      </div>
+
       <p class="cal-heading">Add it to your calendar</p>
       <div class="cal-buttons">
         <a class="cal-btn primary" id="google-cal" href="#" target="_blank" rel="noopener">
@@ -501,6 +555,42 @@
       + "&location=" + encodeURIComponent(location)
       + "&body=" + encodeURIComponent(details);
     document.getElementById("outlook-cal").href = oUrl;
+
+    var RSVP_FORM_URL = "https://forms.gle/vW2KNsV6juMDjEYG8";
+    var RSVP_CAP = 15;
+    var RSVP_SHEET_CSV = "https://docs.google.com/spreadsheets/d/1BozZuaqLrYm8SyUcip3sV93j4iSRETrirsM614_y2H4/gviz/tq?tqx=out:csv&sheet=Summary";
+
+    var rsvpBtn = document.getElementById("rsvp-btn");
+    var rsvpLabel = rsvpBtn.querySelector(".rsvp-label");
+    var rsvpStatus = document.getElementById("rsvp-status");
+    rsvpBtn.href = RSVP_FORM_URL;
+
+    function setRsvpFull(count) {
+      rsvpStatus.textContent = "This hike is full (" + count + "/" + RSVP_CAP + " spots taken). Join the WhatsApp group above to hear about the next one.";
+      rsvpBtn.classList.add("full");
+      rsvpBtn.setAttribute("aria-disabled", "true");
+      rsvpBtn.removeAttribute("href");
+      rsvpBtn.removeAttribute("target");
+      if (rsvpLabel) rsvpLabel.textContent = "Hike Is Full";
+    }
+
+    fetch(RSVP_SHEET_CSV)
+      .then(function (r) { return r.text(); })
+      .then(function (csv) {
+        var lines = csv.trim().split("\n");
+        var raw = (lines[1] || "0").replace(/"/g, "").trim();
+        var count = parseInt(raw, 10);
+        if (isNaN(count) || count < 0) count = 0;
+        if (count >= RSVP_CAP) {
+          setRsvpFull(count);
+        } else {
+          var left = RSVP_CAP - count;
+          rsvpStatus.textContent = left + " of " + RSVP_CAP + " spots left \u2014 first come, first served.";
+        }
+      })
+      .catch(function () {
+        rsvpStatus.textContent = "Tap to RSVP \u2014 spots are limited on this hike.";
+      });
 
     var copyText = title
       + "\nSaturday, September 5th, 10:00 AM (est. 1–2 hours)"
