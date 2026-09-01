@@ -437,6 +437,77 @@
     .event-card { grid-template-columns: 64px 1fr; }
     .event-photo { width: 64px; height: 64px; }
   }
+
+  .trail-guide-intro {
+    text-align: center;
+    margin: -8px 0 20px;
+  }
+
+  .trail-guide { margin-bottom: 8px; }
+
+  .trail-group {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+
+  .trail-group summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .trail-group summary::-webkit-details-marker { display: none; }
+
+  .trail-group-title {
+    font-family: "Oswald", ui-sans-serif, sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    text-transform: uppercase;
+  }
+  .trail-sub {
+    display: block;
+    font-family: "Karla", ui-sans-serif, sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    margin-top: 3px;
+  }
+
+  .trail-group .chevron {
+    color: var(--forest);
+    flex-shrink: 0;
+    transition: transform .2s ease;
+  }
+  .trail-group[open] .chevron { transform: rotate(180deg); }
+
+  .trail-list {
+    list-style: none;
+    margin: 0;
+    padding: 0 18px 14px;
+    border-top: 1px solid var(--line);
+  }
+  .trail-list li {
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .trail-list li:last-child { border-bottom: none; }
+  .trail-list a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 14.5px;
+  }
+  .trail-list a:hover { color: var(--forest); text-decoration: underline; }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -512,6 +583,61 @@
         </button>
       </div>
     </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="section-head">
+    <p class="eyebrow">Trail Guide</p>
+    <h2>Find Your Hike</h2>
+  </div>
+  <p class="small trail-guide-intro">Not every trail fits every stroller, toddler, or ambitious dad &mdash; tap a category to see where to go.</p>
+
+  <div class="trail-guide">
+    <details class="trail-group">
+      <summary>
+        <span class="trail-group-title">Stroller-Friendly Trails
+          <span class="trail-sub">Flat, paved or hard-packed paths for strollers and wagons</span>
+        </span>
+        <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <ul class="trail-list">
+        <li><a href="https://maps.google.com/?q=Oso+Creek+Trail,+Mission+Viejo,+CA" target="_blank" rel="noopener">Oso Creek Trail (Mission Viejo)</a></li>
+        <li><a href="https://maps.google.com/?q=Yorba+Regional+Park,+CA" target="_blank" rel="noopener">Yorba Regional Park</a></li>
+        <li><a href="https://maps.google.com/?q=Heisler+Park,+Laguna+Beach,+CA" target="_blank" rel="noopener">Laguna Beach and Bluffs / Heisler Park</a></li>
+        <li><a href="https://maps.google.com/?q=Doheny+Beach+Trail,+Dana+Point,+CA" target="_blank" rel="noopener">Doheny Beach Trail</a></li>
+      </ul>
+    </details>
+
+    <details class="trail-group">
+      <summary>
+        <span class="trail-group-title">Kid-Friendly / Toddler Hikes
+          <span class="trail-sub">Short, easy trails little legs can handle</span>
+        </span>
+        <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <ul class="trail-list">
+        <li><a href="https://maps.google.com/?q=Oak+Canyon+Nature+Center,+CA" target="_blank" rel="noopener">Oak Canyon Nature Center</a></li>
+        <li><a href="https://maps.google.com/?q=Santiago+Oaks+Regional+Park,+CA" target="_blank" rel="noopener">Santiago Oaks Regional Park</a></li>
+        <li><a href="https://maps.google.com/?q=Peters+Canyon+Reservoir,+CA" target="_blank" rel="noopener">Peters Canyon Reservoir</a></li>
+        <li><a href="https://maps.google.com/?q=Barbara%27s+Lake+Loop,+Laguna+Coast+Wilderness,+CA" target="_blank" rel="noopener">Barbara's Lake Loop</a></li>
+      </ul>
+    </details>
+
+    <details class="trail-group">
+      <summary>
+        <span class="trail-group-title">Dads-Only / Advanced Hikes
+          <span class="trail-sub">Longer, steeper routes for when the kids stay home</span>
+        </span>
+        <svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </summary>
+      <ul class="trail-list">
+        <li><a href="https://maps.google.com/?q=Black+Star+Canyon,+CA" target="_blank" rel="noopener">Black Star Canyon</a></li>
+        <li><a href="https://maps.google.com/?q=Crystal+Cove+Loop+Trail,+CA" target="_blank" rel="noopener">Crystal Cove Loop</a></li>
+        <li><a href="https://maps.google.com/?q=Sitton+Peak+Trail,+CA" target="_blank" rel="noopener">Sitton Peak</a></li>
+        <li><a href="https://maps.google.com/?q=Santiago+Peak,+CA" target="_blank" rel="noopener">Santiago Peak</a></li>
+      </ul>
+    </details>
   </div>
 
   <hr class="divider" />
