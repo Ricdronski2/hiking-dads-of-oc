@@ -210,6 +210,85 @@
     margin: 0 0 20px;
   }
 
+  .future-hikes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .future-hike-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    align-items: start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .fh-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--forest);
+    color: var(--bg);
+    border-radius: 8px;
+    padding: 8px 0;
+    line-height: 1.1;
+  }
+
+  .fh-date .fh-month {
+    font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .fh-date .fh-day {
+    font-family: "Oswald", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .fh-name {
+    font-family: "Oswald", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--forest);
+    margin: 0 0 2px;
+  }
+
+  .fh-loc {
+    font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+  }
+
+  .fh-desc {
+    font-size: 13px;
+    color: var(--ink-faint);
+    line-height: 1.5;
+    margin: 0 0 8px;
+  }
+
+  .fh-when {
+    font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--forest-deep);
+    margin: 0;
+  }
+
   .detail-row {
     display: grid;
     grid-template-columns: 84px 1fr;
@@ -616,6 +695,113 @@
           <svg viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="13" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           <span id="copy-label">Copy details for Apple Calendar</span>
         </button>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="section-head">
+    <p class="eyebrow">Coming Up</p>
+    <h2>Future Hikes</h2>
+  </div>
+  <p class="small trail-guide-intro">Save the date &mdash; RSVP details go out on WhatsApp closer to each hike.</p>
+
+  <div class="future-hikes">
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">OCT</span>
+        <span class="fh-day">3</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Little Hikers Adventure</p>
+        <p class="fh-loc">Oak Canyon Nature Center</p>
+        <p class="fh-desc">Short nature hike geared toward younger kids. Scavenger hunt sheet for the kids.</p>
+        <p class="fh-when">Sat, Oct 3 &middot; 9:00 AM</p>
+      </div>
+    </div>
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">OCT</span>
+        <span class="fh-day">18</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Dads &amp; Kids Beach Walk</p>
+        <p class="fh-loc">Heisler Park, Laguna Beach</p>
+        <p class="fh-desc">Easy coastal walk + playground/beach time afterward.</p>
+        <p class="fh-when">Sun, Oct 18 &middot; 9:00 AM</p>
+      </div>
+    </div>
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">OCT</span>
+        <span class="fh-day">31</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Fall Family Hike &amp; Picnic</p>
+        <p class="fh-loc">Irvine Regional Park area</p>
+        <p class="fh-desc">Easy morning outing followed by bring-your-own picnic.</p>
+        <p class="fh-when">Sat, Oct 31 &middot; 9:00 AM</p>
+      </div>
+    </div>
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">NOV</span>
+        <span class="fh-day">7</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Halloween Costume Walk &#127875;</p>
+        <p class="fh-loc">Oso Creek Trail</p>
+        <p class="fh-desc">Kids come in costumes; short walk followed by treats.</p>
+        <p class="fh-when">Sat, Nov 7 &middot; 8:00 AM</p>
+      </div>
+    </div>
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">NOV</span>
+        <span class="fh-day">15</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Dads-Only Challenge Hike</p>
+        <p class="fh-loc">Crystal Cove</p>
+        <p class="fh-desc">Longer hike and an opportunity for dads to connect without the kids.</p>
+        <p class="fh-when">Sun, Nov 15 &middot; 9:00 AM</p>
+      </div>
+    </div>
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">DEC</span>
+        <span class="fh-day">5</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Turkey Trek &#129411;</p>
+        <p class="fh-loc">Peters Canyon</p>
+        <p class="fh-desc">Family-friendly pre-Thanksgiving hike. Kids can wear turkey/fall colors.</p>
+        <p class="fh-when">Sat, Dec 5 &middot; 9:00 AM</p>
+      </div>
+    </div>
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">DEC</span>
+        <span class="fh-day">13</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Dads &amp; Kids Coastal Walk</p>
+        <p class="fh-loc">Doheny Beach Trail</p>
+        <p class="fh-desc">Relaxed stroller-friendly ocean walk + coffee afterward.</p>
+        <p class="fh-when">Sun, Dec 13 &middot; 9:00 AM</p>
+      </div>
+    </div>
+    <div class="future-hike-item">
+      <div class="fh-date">
+        <span class="fh-month">DEC</span>
+        <span class="fh-day">19</span>
+      </div>
+      <div class="future-hike-info">
+        <p class="fh-name">Holiday Jingle Hike &#127876;</p>
+        <p class="fh-loc">Oso Creek Trail</p>
+        <p class="fh-desc">Santa hats/holiday attire, festive scavenger hunt and hot chocolate afterward.</p>
+        <p class="fh-when">Sat, Dec 19 &middot; 8:00 AM</p>
       </div>
     </div>
   </div>
