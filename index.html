@@ -68,6 +68,10 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  [hidden] {
+    display: none !important;
+  }
+
   .wrap {
     max-width: 620px;
     margin: 0 auto;
@@ -286,6 +290,90 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--forest-deep);
+    margin: 0;
+  }
+
+  .past-events {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .past-hike-item {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 16px;
+    align-items: start;
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    opacity: 0.85;
+  }
+
+  .ph-date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink-faint);
+    color: var(--bg);
+    border-radius: 8px;
+    padding: 8px 0;
+    line-height: 1.1;
+  }
+
+  .ph-date .ph-month {
+    font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .ph-date .ph-day {
+    font-family: "Oswald", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .ph-name {
+    font-family: "Oswald", ui-sans-serif, sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: var(--ink-soft);
+    margin: 0 0 2px;
+  }
+
+  .ph-badge {
+    display: inline-block;
+    font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--line-strong);
+    color: var(--ink-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+
+  .ph-loc {
+    font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--ink-faint);
+    margin: 0 0 6px;
+  }
+
+  .ph-desc {
+    font-size: 13px;
+    color: var(--ink-faint);
+    line-height: 1.5;
     margin: 0;
   }
 
@@ -639,6 +727,7 @@
     <p class="join-note">One tap to join &mdash; used for hike announcements and last-minute updates.</p>
   </header>
 
+  <div id="upcoming-featured-full">
   <div class="section-head">
     <p class="eyebrow">Next Up</p>
     <h2>Upcoming Event</h2>
@@ -698,6 +787,11 @@
       </div>
     </div>
   </div>
+  </div><!-- /upcoming-featured-full -->
+
+  <div id="upcoming-featured-fallback" class="upcoming-card" hidden></div>
+
+  <p id="no-upcoming-message" class="small trail-guide-intro" hidden>No upcoming hikes scheduled right now &mdash; check back soon or join the WhatsApp group above.</p>
 
   <hr class="divider" />
 
@@ -707,104 +801,8 @@
   </div>
   <p class="small trail-guide-intro">Save the date &mdash; RSVP details go out on WhatsApp closer to each hike.</p>
 
-  <div class="future-hikes">
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">OCT</span>
-        <span class="fh-day">3</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Little Hikers Adventure</p>
-        <p class="fh-loc">Oak Canyon Nature Center</p>
-        <p class="fh-desc">Short nature hike geared toward younger kids. Scavenger hunt sheet for the kids.</p>
-        <p class="fh-when">Sat, Oct 3 &middot; 9:00 AM</p>
-      </div>
-    </div>
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">OCT</span>
-        <span class="fh-day">18</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Dads &amp; Kids Beach Walk</p>
-        <p class="fh-loc">Heisler Park, Laguna Beach</p>
-        <p class="fh-desc">Easy coastal walk + playground/beach time afterward.</p>
-        <p class="fh-when">Sun, Oct 18 &middot; 9:00 AM</p>
-      </div>
-    </div>
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">OCT</span>
-        <span class="fh-day">31</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Fall Family Hike &amp; Picnic</p>
-        <p class="fh-loc">Irvine Regional Park area</p>
-        <p class="fh-desc">Easy morning outing followed by bring-your-own picnic.</p>
-        <p class="fh-when">Sat, Oct 31 &middot; 9:00 AM</p>
-      </div>
-    </div>
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">NOV</span>
-        <span class="fh-day">7</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Halloween Costume Walk &#127875;</p>
-        <p class="fh-loc">Oso Creek Trail</p>
-        <p class="fh-desc">Kids come in costumes; short walk followed by treats.</p>
-        <p class="fh-when">Sat, Nov 7 &middot; 8:00 AM</p>
-      </div>
-    </div>
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">NOV</span>
-        <span class="fh-day">15</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Dads-Only Challenge Hike</p>
-        <p class="fh-loc">Crystal Cove</p>
-        <p class="fh-desc">Longer hike and an opportunity for dads to connect without the kids.</p>
-        <p class="fh-when">Sun, Nov 15 &middot; 9:00 AM</p>
-      </div>
-    </div>
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">DEC</span>
-        <span class="fh-day">5</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Turkey Trek &#129411;</p>
-        <p class="fh-loc">Peters Canyon</p>
-        <p class="fh-desc">Family-friendly pre-Thanksgiving hike. Kids can wear turkey/fall colors.</p>
-        <p class="fh-when">Sat, Dec 5 &middot; 9:00 AM</p>
-      </div>
-    </div>
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">DEC</span>
-        <span class="fh-day">13</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Dads &amp; Kids Coastal Walk</p>
-        <p class="fh-loc">Doheny Beach Trail</p>
-        <p class="fh-desc">Relaxed stroller-friendly ocean walk + coffee afterward.</p>
-        <p class="fh-when">Sun, Dec 13 &middot; 9:00 AM</p>
-      </div>
-    </div>
-    <div class="future-hike-item">
-      <div class="fh-date">
-        <span class="fh-month">DEC</span>
-        <span class="fh-day">19</span>
-      </div>
-      <div class="future-hike-info">
-        <p class="fh-name">Holiday Jingle Hike &#127876;</p>
-        <p class="fh-loc">Oso Creek Trail</p>
-        <p class="fh-desc">Santa hats/holiday attire, festive scavenger hunt and hot chocolate afterward.</p>
-        <p class="fh-when">Sat, Dec 19 &middot; 8:00 AM</p>
-      </div>
-    </div>
-  </div>
+  <div class="future-hikes" id="future-hikes-list"></div>
+  <p id="no-future-message" class="small trail-guide-intro" hidden>No other hikes scheduled yet &mdash; check back soon!</p>
 
   <hr class="divider" />
 
@@ -887,7 +885,9 @@
     <h2>Past Events</h2>
   </div>
 
-  <div class="empty-state">
+  <div class="past-events" id="past-events-list" hidden></div>
+
+  <div class="empty-state" id="no-past-message">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4.5a1.5 1.5 0 1 1 3 0v1a1.5 1.5 0 1 1-3 0v-1Z"/><path d="M12 8c1 1.5 1 3-.5 5-1 1.5-1.5 2.5-1 4"/><path d="M15 12.5a1.5 1.5 0 1 1 3 0v1a1.5 1.5 0 1 1-3 0v-1Z"/><path d="M18 16c.6 1.2.4 2.6-1 4"/></svg>
     <p>No past events yet &mdash; this is where the trail log starts.</p>
     <p class="small">Join the WhatsApp group above and watch for the next hike announcement.</p>
@@ -898,6 +898,144 @@
 
 <script>
   (function () {
+    // ---- All hikes: featured / future / past are derived automatically from these dates ----
+    var EVENTS = [
+      {
+        id: "walk-talk",
+        name: "Walk &amp; Talk",
+        location: "Oso Viejo Community Park &mdash; Parking Lot",
+        meetupDetail: "Oso Creek Trail, Mission Viejo, CA &middot; 24932 Veterans Way",
+        mapsQuery: "24932+Veterans+Way,+Mission+Viejo,+CA",
+        description: "2.8 mile walk &middot; estimated 1&ndash;2 hours",
+        date: "2026-09-05",
+        startTime: "10:00",
+        endTime: "12:00",
+        rsvp: {
+          formUrl: "https://tally.so/r/obj0lX",
+          cap: 15,
+          sheetCsv: "https://docs.google.com/spreadsheets/d/1u89Fgo3V6P8Bp8oL7b0cbw_ChgxTiw3Z1pgWiuAK6Iw/gviz/tq?tqx=out:csv&sheet=Summary"
+        }
+      },
+      { id: "little-hikers", name: "Little Hikers Adventure", location: "Oak Canyon Nature Center", description: "Short nature hike geared toward younger kids. Scavenger hunt sheet for the kids.", date: "2026-10-03", startTime: "09:00" },
+      { id: "beach-walk", name: "Dads &amp; Kids Beach Walk", location: "Heisler Park, Laguna Beach", description: "Easy coastal walk + playground/beach time afterward.", date: "2026-10-18", startTime: "09:00" },
+      { id: "fall-picnic", name: "Fall Family Hike &amp; Picnic", location: "Irvine Regional Park area", description: "Easy morning outing followed by bring-your-own picnic.", date: "2026-10-31", startTime: "09:00" },
+      { id: "halloween-walk", name: "Halloween Costume Walk &#127875;", location: "Oso Creek Trail", description: "Kids come in costumes; short walk followed by treats.", date: "2026-11-07", startTime: "08:00" },
+      { id: "dads-challenge", name: "Dads-Only Challenge Hike", location: "Crystal Cove", description: "Longer hike and an opportunity for dads to connect without the kids.", date: "2026-11-15", startTime: "09:00" },
+      { id: "turkey-trek", name: "Turkey Trek &#129411;", location: "Peters Canyon", description: "Family-friendly pre-Thanksgiving hike. Kids can wear turkey/fall colors.", date: "2026-12-05", startTime: "09:00" },
+      { id: "coastal-walk", name: "Dads &amp; Kids Coastal Walk", location: "Doheny Beach Trail", description: "Relaxed stroller-friendly ocean walk + coffee afterward.", date: "2026-12-13", startTime: "09:00" },
+      { id: "jingle-hike", name: "Holiday Jingle Hike &#127876;", location: "Oso Creek Trail", description: "Santa hats/holiday attire, festive scavenger hunt and hot chocolate afterward.", date: "2026-12-19", startTime: "08:00" }
+    ];
+
+    // ---- Date helpers (compare as local Y-M-D strings so visitor timezone never shifts a day) ----
+    function pad(n) { return n < 10 ? "0" + n : "" + n; }
+    function todayKey() {
+      var d = new Date();
+      return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate());
+    }
+    function parseLocalDate(iso) {
+      var p = iso.split("-");
+      return new Date(parseInt(p[0], 10), parseInt(p[1], 10) - 1, parseInt(p[2], 10));
+    }
+    var DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    function formatDateShort(iso) {
+      var d = parseLocalDate(iso);
+      return DOW[d.getDay()] + ", " + MON[d.getMonth()] + " " + d.getDate();
+    }
+    function monthAbbr(iso) { return MON[parseLocalDate(iso).getMonth()].toUpperCase(); }
+    function dayNum(iso) { return parseLocalDate(iso).getDate(); }
+    function formatTime(t) {
+      if (!t) return "";
+      var p = t.split(":");
+      var h = parseInt(p[0], 10);
+      var ampm = h >= 12 ? "PM" : "AM";
+      var h12 = h % 12; if (h12 === 0) h12 = 12;
+      return h12 + ":" + p[1] + " " + ampm;
+    }
+
+    var today = todayKey();
+    var upcoming = EVENTS.filter(function (e) { return e.date >= today; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
+    var past = EVENTS.filter(function (e) { return e.date < today; })
+      .sort(function (a, b) { return a.date > b.date ? -1 : (a.date < b.date ? 1 : 0); });
+
+    var featured = upcoming.length ? upcoming[0] : null;
+    var restUpcoming = upcoming.slice(1);
+
+    // ---- Featured "Upcoming Event" slot ----
+    var walkTalkBlock = document.getElementById("upcoming-featured-full");
+    var fallbackBlock = document.getElementById("upcoming-featured-fallback");
+    var noUpcomingMsg = document.getElementById("no-upcoming-message");
+    var isWalkTalkFeatured = !!(featured && featured.id === "walk-talk");
+
+    if (walkTalkBlock) walkTalkBlock.hidden = !isWalkTalkFeatured;
+    if (fallbackBlock) fallbackBlock.hidden = !(featured && !isWalkTalkFeatured);
+    if (noUpcomingMsg) noUpcomingMsg.hidden = !!featured;
+
+    if (featured && !isWalkTalkFeatured && fallbackBlock) {
+      var mapsHref = "https://maps.google.com/?q=" + encodeURIComponent(featured.location.replace(/&amp;/g, "&") + ", CA");
+      fallbackBlock.innerHTML =
+        '<div class="upcoming-inner">' +
+        '<p class="upcoming-name">' + featured.name + '</p>' +
+        '<p class="upcoming-subtitle">Dads &middot; Kids &middot; Connection</p>' +
+        '<div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">' + formatDateShort(featured.date) + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">Time</span><span class="detail-value">' + formatTime(featured.startTime) + '</span></div>' +
+        '<div class="detail-row"><span class="detail-label">Where</span><span class="detail-value">' + featured.location +
+        ' <a class="directions" href="' + mapsHref + '" target="_blank" rel="noopener">' +
+        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Get directions</a></span></div>' +
+        '<p class="fh-desc" style="margin-top:14px;">' + featured.description + '</p>' +
+        '<p class="rsvp-status" style="margin-top:10px;">RSVP details go out on WhatsApp closer to this hike.</p>' +
+        '</div>';
+    }
+
+    // ---- Future Hikes list (everything upcoming after the featured one) ----
+    var futureList = document.getElementById("future-hikes-list");
+    var noFutureMsg = document.getElementById("no-future-message");
+    if (futureList) {
+      if (restUpcoming.length) {
+        futureList.innerHTML = restUpcoming.map(function (ev) {
+          return '<div class="future-hike-item">' +
+            '<div class="fh-date"><span class="fh-month">' + monthAbbr(ev.date) + '</span><span class="fh-day">' + dayNum(ev.date) + '</span></div>' +
+            '<div class="future-hike-info">' +
+            '<p class="fh-name">' + ev.name + '</p>' +
+            '<p class="fh-loc">' + ev.location + '</p>' +
+            '<p class="fh-desc">' + ev.description + '</p>' +
+            '<p class="fh-when">' + formatDateShort(ev.date) + ' &middot; ' + formatTime(ev.startTime) + '</p>' +
+            '</div></div>';
+        }).join("");
+        futureList.hidden = false;
+        if (noFutureMsg) noFutureMsg.hidden = true;
+      } else {
+        futureList.hidden = true;
+        if (noFutureMsg) noFutureMsg.hidden = false;
+      }
+    }
+
+    // ---- Past Events (Trail Log) ----
+    var pastList = document.getElementById("past-events-list");
+    var noPastMsg = document.getElementById("no-past-message");
+    if (pastList) {
+      if (past.length) {
+        pastList.innerHTML = past.map(function (ev) {
+          return '<div class="past-hike-item">' +
+            '<div class="ph-date"><span class="ph-month">' + monthAbbr(ev.date) + '</span><span class="ph-day">' + dayNum(ev.date) + '</span></div>' +
+            '<div class="past-hike-info">' +
+            '<p class="ph-name">' + ev.name + '<span class="ph-badge">Completed</span></p>' +
+            '<p class="ph-loc">' + ev.location + '</p>' +
+            '<p class="ph-desc">' + ev.description + '</p>' +
+            '</div></div>';
+        }).join("");
+        pastList.hidden = false;
+        if (noPastMsg) noPastMsg.hidden = true;
+      } else {
+        pastList.hidden = true;
+        if (noPastMsg) noPastMsg.hidden = false;
+      }
+    }
+
+    // ---- Everything below only matters while Walk & Talk is the featured hike ----
+    if (!isWalkTalkFeatured) return;
+
     var title = "Walk & Talk — Dads, Kids, Connection";
     var details = "2.8 mile walk on the Oso Creek Trail (estimated 1–2 hours). Meet at the Oso Viejo Community Park parking lot, 24932 Veterans Way, Mission Viejo, CA.";
     var location = "Oso Viejo Community Park Parking Lot, 24932 Veterans Way, Mission Viejo, CA";
@@ -951,11 +1089,11 @@
           setRsvpFull(count);
         } else {
           var left = RSVP_CAP - count;
-          rsvpStatus.textContent = left + " of " + RSVP_CAP + " spots left \u2014 first come, first served.";
+          rsvpStatus.textContent = left + " of " + RSVP_CAP + " spots left — first come, first served.";
         }
       })
       .catch(function () {
-        rsvpStatus.textContent = "Tap to RSVP \u2014 spots are limited on this hike.";
+        rsvpStatus.textContent = "Tap to RSVP — spots are limited on this hike.";
       });
 
     var copyText = title
