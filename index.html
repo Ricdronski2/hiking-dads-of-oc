@@ -989,6 +989,7 @@
       return h12 + ":" + p[1] + " " + ampm;
     }
 
+    function wireRsvp(btnEl, labelEl, statusEl, rsvpConfig) { if (!btnEl || !statusEl || !rsvpConfig) return; var cap = rsvpConfig.cap; btnEl.href = rsvpConfig.formUrl; function setFull(count) { statusEl.textContent = "This hike is full (" + count + "/" + cap + " spots taken). Join the WhatsApp group above to hear about the next one."; btnEl.classList.add("full"); btnEl.setAttribute("aria-disabled", "true"); btnEl.removeAttribute("href"); btnEl.removeAttribute("target"); if (labelEl) labelEl.textContent = "Hike Is Full"; } fetch(rsvpConfig.sheetCsv).then(function (r) { return r.text(); }).then(function (csv) { var lines = csv.trim().split("\n"); var raw = (lines[1] || "0").replace(/"/g, "").trim(); var count = parseInt(raw, 10); if (isNaN(count) || count < 0) count = 0; if (count >= cap) { setFull(count); } else { var left = cap - count; statusEl.textContent = left + " of " + cap + " spots left — first come, first served."; } }).catch(function () { statusEl.textContent = "Tap to RSVP — spots are limited on this hike."; }); }
     var today = todayKey();
     var upcoming = EVENTS.filter(function (e) { return e.date >= today; })
       .sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
@@ -1010,6 +1011,7 @@
 
     if (featured && !isWalkTalkFeatured && fallbackBlock) {
       var mapsHref = "https://maps.google.com/?q=" + encodeURIComponent(featured.location.replace(/&amp;/g, "&") + ", CA");
+      var fallbackRsvpHtml = featured.rsvp ? '<div class="rsvp-block"><a class="rsvp-cta" id="fallback-rsvp-btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span class="rsvp-label">RSVP &middot; Join This Hike</span></a><p class="rsvp-status" id="fallback-rsvp-status">Loading spots&hellip;</p></div>' : '<p class="rsvp-status" style="margin-top:10px;">RSVP details go out on WhatsApp closer to this hike.</p>';
       fallbackBlock.innerHTML =
         (featured.image ? '<div class="upcoming-banner"><img src="' + featured.image + '" alt="' + featured.name + '"></div>' : '') + '<div class="upcoming-inner">' +
         '<p class="upcoming-name">' + featured.name + (featured.category ? ' <span class="category-badge">' + featured.category + '</span>' : '') + '</p>' +
@@ -1020,8 +1022,10 @@
         ' <a class="directions" href="' + mapsHref + '" target="_blank" rel="noopener">' +
         '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Get directions</a></span></div>' +
         '<p class="fh-desc" style="margin-top:14px;">' + featured.description + '</p>' +
-        '<p class="rsvp-status" style="margin-top:10px;">RSVP details go out on WhatsApp closer to this hike.</p>' +
+        fallbackRsvpHtml +
         '</div>';
+      if (featured.rsvp) { var fallbackRsvpBtn = document.getElementById("fallback-rsvp-btn"); var fallbackRsvpLabel = fallbackRsvpBtn ? fallbackRsvpBtn.querySelector(".rsvp-label") : null; var fallbackRsvpStatus = document.getElementById("fallback-rsvp-status"); wireRsvp(fallbackRsvpBtn, fallbackRsvpLabel, fallbackRsvpStatus, featured.rsvp); }
+      
     }
 
     // ---- Future Hikes list (everything upcoming after the featured one) ----
@@ -1096,41 +1100,7 @@
       + "&body=" + encodeURIComponent(details);
     document.getElementById("outlook-cal").href = oUrl;
 
-    var RSVP_FORM_URL = "https://tally.so/r/7RAlJP";
-    var RSVP_CAP = 15;
-    var RSVP_SHEET_CSV = "https://docs.google.com/spreadsheets/d/14zDEAesEQIyVp03hsin6VG2aQialgdmrdJRfdiVbTFU/gviz/tq?tqx=out:csv&sheet=Sheet1";
-
-    var rsvpBtn = document.getElementById("rsvp-btn");
-    var rsvpLabel = rsvpBtn.querySelector(".rsvp-label");
-    var rsvpStatus = document.getElementById("rsvp-status");
-    rsvpBtn.href = RSVP_FORM_URL;
-
-    function setRsvpFull(count) {
-      rsvpStatus.textContent = "This hike is full (" + count + "/" + RSVP_CAP + " spots taken). Join the WhatsApp group above to hear about the next one.";
-      rsvpBtn.classList.add("full");
-      rsvpBtn.setAttribute("aria-disabled", "true");
-      rsvpBtn.removeAttribute("href");
-      rsvpBtn.removeAttribute("target");
-      if (rsvpLabel) rsvpLabel.textContent = "Hike Is Full";
-    }
-
-    fetch(RSVP_SHEET_CSV)
-      .then(function (r) { return r.text(); })
-      .then(function (csv) {
-        var lines = csv.trim().split("\n");
-        var raw = (lines[1] || "0").replace(/"/g, "").trim();
-        var count = parseInt(raw, 10);
-        if (isNaN(count) || count < 0) count = 0;
-        if (count >= RSVP_CAP) {
-          setRsvpFull(count);
-        } else {
-          var left = RSVP_CAP - count;
-          rsvpStatus.textContent = left + " of " + RSVP_CAP + " spots left — first come, first served.";
-        }
-      })
-      .catch(function () {
-        rsvpStatus.textContent = "Tap to RSVP — spots are limited on this hike.";
-      });
+    var rsvpBtn = document.getElementById("rsvp-btn"); var rsvpLabel = rsvpBtn.querySelector(".rsvp-label"); var rsvpStatus = document.getElementById("rsvp-status"); wireRsvp(rsvpBtn, rsvpLabel, rsvpStatus, featured.rsvp);
 
     var copyText = title
       + "\nSaturday, September 5th, 10:00 AM (est. 1–2 hours)"
