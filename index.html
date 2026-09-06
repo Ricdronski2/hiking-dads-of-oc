@@ -383,7 +383,7 @@
     margin: 0 0 2px;
   }
 
-  .ph-badge {
+  .category-badge { display: inline-block; font-family: "Karla", ui-sans-serif, system-ui, sans-serif; font-weight: 700; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; background: var(--forest); color: var(--bg); padding: 2px 8px; border-radius: 999px; vertical-align: middle; margin-left: 6px; } .ph-badge {
     display: inline-block;
     font-family: "Karla", ui-sans-serif, system-ui, sans-serif;
     font-weight: 700;
@@ -952,7 +952,7 @@
           sheetCsv: "https://docs.google.com/spreadsheets/d/14zDEAesEQIyVp03hsin6VG2aQialgdmrdJRfdiVbTFU/gviz/tq?tqx=out:csv&sheet=Sheet1"
         }
       },
-      { id: "little-hikers", name: "Little Hikers Adventure", location: "Oak Canyon Nature Center", description: "Short nature hike geared toward younger kids. Scavenger hunt sheet for the kids.", date: "2026-10-03", startTime: "09:00" },
+      { id: "peters-canyon-hike", name: "Peters Canyon Hike", location: "Peters Canyon Regional Park", description: "6.3 mile hike &middot; advanced difficulty &mdash; dads-only pace, not suited for strollers or young kids.", date: "2026-10-03", startTime: "09:00", category: "Advanced Hiking" },
       { id: "beach-walk", name: "Dads &amp; Kids Beach Walk", location: "Heisler Park, Laguna Beach", description: "Easy coastal walk + playground/beach time afterward.", date: "2026-10-18", startTime: "09:00" },
       { id: "fall-picnic", name: "Fall Family Hike &amp; Picnic", location: "Irvine Regional Park area", description: "Easy morning outing followed by bring-your-own picnic.", date: "2026-11-07", startTime: "09:00" },
       { id: "halloween-walk", name: "Halloween Costume Walk &#127875;", location: "Oso Creek Trail", description: "Kids come in costumes; short walk followed by treats.", date: "2026-10-31", startTime: "08:00" },
@@ -1033,7 +1033,7 @@
           return '<div class="future-hike-item">' +
             '<div class="fh-date"><span class="fh-month">' + monthAbbr(ev.date) + '</span><span class="fh-day">' + dayNum(ev.date) + '</span></div>' +
             '<div class="future-hike-info">' +
-            '<p class="fh-name">' + ev.name + '</p>' +
+            '<p class="fh-name">' + ev.name + (ev.category ? ' <span class="category-badge">' + ev.category + '</span>' : '') + '</p>' +
             '<p class="fh-loc">' + ev.location + '</p>' +
             '<p class="fh-desc">' + ev.description + '</p>' +
             '<p class="fh-when">' + formatDateShort(ev.date) + ' &middot; ' + formatTime(ev.startTime) + '</p>' +
@@ -1056,7 +1056,7 @@
           return '<div class="past-hike-item">' +
             '<div class="ph-date"><span class="ph-month">' + monthAbbr(ev.date) + '</span><span class="ph-day">' + dayNum(ev.date) + '</span></div>' +
             '<div class="past-hike-info">' +
-            '<p class="ph-name">' + ev.name + '<span class="ph-badge">Completed</span></p>' +
+            '<p class="ph-name">' + ev.name + '<span class="ph-badge">Completed</span>' + (ev.category ? ' <span class="category-badge">' + ev.category + '</span>' : '') + '</p>' +
             '<p class="ph-loc">' + ev.location + '</p>' +
             '<p class="ph-desc">' + ev.description + '</p>' +
             '</div></div>';
