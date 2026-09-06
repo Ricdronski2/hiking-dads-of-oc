@@ -1012,7 +1012,7 @@
       var mapsHref = "https://maps.google.com/?q=" + encodeURIComponent(featured.location.replace(/&amp;/g, "&") + ", CA");
       fallbackBlock.innerHTML =
         '<div class="upcoming-inner">' +
-        '<p class="upcoming-name">' + featured.name + '</p>' +
+        '<p class="upcoming-name">' + featured.name + (featured.category ? ' <span class="category-badge">' + featured.category + '</span>' : '') + '</p>' +
         '<p class="upcoming-subtitle">Dads &middot; Kids &middot; Connection</p>' +
         '<div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">' + formatDateShort(featured.date) + '</span></div>' +
         '<div class="detail-row"><span class="detail-label">Time</span><span class="detail-value">' + formatTime(featured.startTime) + '</span></div>' +
