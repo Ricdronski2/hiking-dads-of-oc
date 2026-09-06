@@ -929,7 +929,7 @@
     <p class="small">Join the WhatsApp group above and watch for the next hike announcement.</p>
   </div>
 
-  <footer>Hiking Dads of OC &middot; Orange County, California &middot; hikingdadsofoc.org &middot; <a href="mailto:info@hikingdadsofoc.org" style="color:inherit;">info@hikingdadsofoc.org</a><br><span style="font-size:12px;">ralstonit.com is a sponsor of this site</span></footer>
+  <footer>Hiking Dads of OC &middot; Orange County, California &middot; hikingdadsofoc.org &middot; <a href="mailto:info@hikingdadsofoc.org" style="color:inherit;">info@hikingdadsofoc.org</a> &middot; <a href="https://www.instagram.com/hikingdadsofoc/" target="_blank" rel="noopener" style="color:inherit;">Instagram</a><br><span style="font-size:12px;">ralstonit.com is a sponsor of this site</span></footer>
 </div>
 
 <script>
@@ -952,7 +952,7 @@
           sheetCsv: "https://docs.google.com/spreadsheets/d/14zDEAesEQIyVp03hsin6VG2aQialgdmrdJRfdiVbTFU/gviz/tq?tqx=out:csv&sheet=Sheet1"
         }
       },
-      { id: "peters-canyon-hike", name: "Peters Canyon Hike", location: "Peters Canyon Regional Park", description: "6.3 mile hike &middot; advanced difficulty &mdash; dads-only pace, not suited for strollers or young kids.", date: "2026-10-03", startTime: "10:00", category: "Advanced Hiking" },
+      { id: "peters-canyon-hike", name: "Peters Canyon Hike", location: "Peters Canyon Regional Park", description: "6.3 mile hike &middot; advanced difficulty &mdash; dads-only pace, not suited for strollers or young kids.", date: "2026-10-03", startTime: "10:00", category: "Dads-Only / Advanced Hikes", image: "/peters-canyon-hike.jpg" },
       { id: "beach-walk", name: "Dads &amp; Kids Beach Walk", location: "Heisler Park, Laguna Beach", description: "Easy coastal walk + playground/beach time afterward.", date: "2026-10-18", startTime: "09:00" },
       { id: "fall-picnic", name: "Fall Family Hike &amp; Picnic", location: "Irvine Regional Park area", description: "Easy morning outing followed by bring-your-own picnic.", date: "2026-11-07", startTime: "09:00" },
       { id: "halloween-walk", name: "Halloween Costume Walk &#127875;", location: "Oso Creek Trail", description: "Kids come in costumes; short walk followed by treats.", date: "2026-10-31", startTime: "08:00" },
@@ -1011,7 +1011,7 @@
     if (featured && !isWalkTalkFeatured && fallbackBlock) {
       var mapsHref = "https://maps.google.com/?q=" + encodeURIComponent(featured.location.replace(/&amp;/g, "&") + ", CA");
       fallbackBlock.innerHTML =
-        '<div class="upcoming-inner">' +
+        (featured.image ? '<div class="upcoming-banner"><img src="' + featured.image + '" alt="' + featured.name + '"></div>' : '') + '<div class="upcoming-inner">' +
         '<p class="upcoming-name">' + featured.name + (featured.category ? ' <span class="category-badge">' + featured.category + '</span>' : '') + '</p>' +
         '<p class="upcoming-subtitle">Dads &middot; Kids &middot; Connection</p>' +
         '<div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">' + formatDateShort(featured.date) + '</span></div>' +
