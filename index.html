@@ -776,7 +776,7 @@
     </div>
     <div class="upcoming-inner">
       <p class="upcoming-name">Walk &amp; Talk</p>
-      <p class="upcoming-subtitle">Dads &middot; Kids &middot; Connection</p>
+      <p class="upcoming-subtitle">2.8 mile walk &middot; estimated 1&ndash;2 hours</p>
 
       <div class="detail-row">
         <span class="detail-label">Date</span>
@@ -784,7 +784,7 @@
       </div>
       <div class="detail-row">
         <span class="detail-label">Time</span>
-        <span class="detail-value">10:00 AM<span class="sub">2.8 mile walk &middot; estimated 1&ndash;2 hours</span></span>
+        <span class="detail-value">10:00 AM</span>
       </div>
       <div class="detail-row">
         <span class="detail-label">Meet&#8209;up</span>
@@ -828,17 +828,6 @@
   <div id="upcoming-featured-fallback" class="upcoming-card" hidden></div>
 
   <p id="no-upcoming-message" class="small trail-guide-intro" hidden>No upcoming hikes scheduled right now &mdash; check back soon or join the WhatsApp group above.</p>
-
-  <hr class="divider" />
-
-  <div class="section-head">
-    <p class="eyebrow">Coming Up</p>
-    <h2>Future Hikes</h2>
-  </div>
-  <p class="small trail-guide-intro">Save the date &mdash; RSVP details go out on WhatsApp closer to each hike.</p>
-
-  <div class="future-hikes" id="future-hikes-list"></div>
-  <p id="no-future-message" class="small trail-guide-intro" hidden>No other hikes scheduled yet &mdash; check back soon!</p>
 
   <hr class="divider" />
 
@@ -913,6 +902,17 @@
       </ul>
     </details>
   </div>
+
+  <hr class="divider" />
+
+  <div class="section-head">
+    <p class="eyebrow">Coming Up</p>
+    <h2>Future Hikes</h2>
+  </div>
+  <p class="small trail-guide-intro">Save the date &mdash; RSVP details go out on WhatsApp closer to each hike.</p>
+
+  <div class="future-hikes" id="future-hikes-list"></div>
+  <p id="no-future-message" class="small trail-guide-intro" hidden>No other hikes scheduled yet &mdash; check back soon!</p>
 
   <hr class="divider" />
 
@@ -1015,13 +1015,12 @@
       fallbackBlock.innerHTML =
         (featured.image ? '<div class="upcoming-banner"><img src="' + featured.image + '" alt="' + featured.name + '"></div>' : '') + '<div class="upcoming-inner">' +
         '<p class="upcoming-name">' + featured.name + (featured.category ? ' <span class="category-badge">' + featured.category + '</span>' : '') + '</p>' +
-        '<p class="upcoming-subtitle">Dads &middot; Kids &middot; Connection</p>' +
+        '<p class="upcoming-subtitle">' + featured.description + '</p>' +
         '<div class="detail-row"><span class="detail-label">Date</span><span class="detail-value">' + formatDateShort(featured.date) + '</span></div>' +
         '<div class="detail-row"><span class="detail-label">Time</span><span class="detail-value">' + formatTime(featured.startTime) + '</span></div>' +
         '<div class="detail-row"><span class="detail-label">Where</span><span class="detail-value">' + featured.location +
         ' <a class="directions" href="' + mapsHref + '" target="_blank" rel="noopener">' +
         '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Get directions</a></span></div>' +
-        '<p class="fh-desc" style="margin-top:14px;">' + featured.description + '</p>' +
         fallbackRsvpHtml +
         '</div>';
       if (featured.rsvp) { var fallbackRsvpBtn = document.getElementById("fallback-rsvp-btn"); var fallbackRsvpLabel = fallbackRsvpBtn ? fallbackRsvpBtn.querySelector(".rsvp-label") : null; var fallbackRsvpStatus = document.getElementById("fallback-rsvp-status"); wireRsvp(fallbackRsvpBtn, fallbackRsvpLabel, fallbackRsvpStatus, featured.rsvp); }
