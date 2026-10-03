@@ -244,7 +244,7 @@
 
   .upcoming-banner img {
     width: 100%;
-    height: auto;
+    height: auto; max-height: 400px; object-fit: contain; background: var(--surface);
     display: block;
   }
 
@@ -994,7 +994,7 @@
         }
       },
   { id: "peters-canyon-hike", name: "Peters Canyon Hike", location: "Peters Canyon Regional Park", description: "6.3 mile hike &middot; advanced difficulty &mdash; dads-only pace, not suited for strollers or young kids.", date: "2026-10-03", startTime: "10:00", category: "Dads-Only / Advanced Hikes", image: "/peters-canyon-hike.jpg", rsvp: { formUrl: "https://tally.so/r/BzyXN4", cap: 10, sheetCsv: "https://docs.google.com/spreadsheets/d/14zDEAesEQIyVp03hsin6VG2aQialgdmrdJRfdiVbTFU/gviz/tq?tqx=out:csv&sheet=Peters+Canyon+Hike" } },
-      { id: "beach-walk", name: "Dads &amp; Kids Beach Walk", location: "Heisler Park, Laguna Beach", description: "Easy coastal walk + playground/beach time afterward.", date: "2026-10-18", startTime: "09:00" },
+      { id: "beach-walk", name: "Dads &amp; Kids Beach Walk", location: "Heisler Park, Laguna Beach", description: "Easy coastal walk + playground/beach time afterward.", date: "2026-10-18", startTime: "09:00" }, { id: "silverado-kids-corral", name: "Silverado Country Fair: Kids Corral", location: "Silverado Country Fair, 27641 Silverado Canyon Rd, Silverado", description: "Sat &amp; Sun, Oct 10&ndash;11 &mdash; gold mining, face painting, arts &amp; crafts, drum circle and puppets.", date: "2026-10-10", endDate: "2026-10-11", startTime: "11:30", image: "/image.png" },
       { id: "fall-picnic", name: "Fall Family Hike &amp; Picnic", location: "Irvine Regional Park area", description: "Easy morning outing followed by bring-your-own picnic.", date: "2026-11-07", startTime: "09:00" },
       { id: "halloween-walk", name: "Halloween Costume Walk &#127875;", location: "Oso Creek Trail", description: "Kids come in costumes; short walk followed by treats.", date: "2026-10-31", startTime: "08:00" },
       { id: "dads-challenge", name: "Dads-Only Challenge Hike", location: "Crystal Cove", description: "Longer hike and an opportunity for dads to connect without the kids.", date: "2026-12-05", startTime: "09:00" },
@@ -1032,9 +1032,9 @@
 
     function wireRsvp(btnEl, labelEl, statusEl, rsvpConfig) { if (!btnEl || !statusEl || !rsvpConfig) return; var cap = rsvpConfig.cap; btnEl.href = rsvpConfig.formUrl; function setFull(count) { statusEl.textContent = "This event is full (" + count + "/" + cap + " spots taken). Join the WhatsApp group above to hear about the next one."; btnEl.classList.add("full"); btnEl.setAttribute("aria-disabled", "true"); btnEl.removeAttribute("href"); btnEl.removeAttribute("target"); if (labelEl) labelEl.textContent = "Event Full"; } fetch(rsvpConfig.sheetCsv).then(function (r) { return r.text(); }).then(function (csv) { var lines = csv.trim().split("\n"); var raw = (lines[1] || "0").replace(/"/g, "").trim(); var count = parseInt(raw, 10); if (isNaN(count) || count < 0) count = 0; if (count >= cap) { setFull(count); } else { var left = cap - count; statusEl.textContent = left + " of " + cap + " spots left — first come, first served."; } }).catch(function () { statusEl.textContent = "Tap to RSVP — spots are limited on this event."; }); }
     var today = todayKey();
-    var upcoming = EVENTS.filter(function (e) { return e.date >= today; })
+    var upcoming = EVENTS.filter(function (e) { return (e.endDate || e.date) >= today; })
       .sort(function (a, b) { return a.date < b.date ? -1 : (a.date > b.date ? 1 : 0); });
-    var past = EVENTS.filter(function (e) { return e.date < today; })
+    var past = EVENTS.filter(function (e) { return (e.endDate || e.date) < today; })
       .sort(function (a, b) { return a.date > b.date ? -1 : (a.date < b.date ? 1 : 0); });
 
     var featured = upcoming.length ? upcoming[0] : null;
