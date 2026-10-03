@@ -365,6 +365,26 @@
     margin: 0;
   }
 
+  .fh-thumb {
+    position: relative;
+    margin: 0 0 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    line-height: 0;
+    box-shadow: var(--shadow);
+  }
+
+  .fh-thumb img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    background: var(--surface);
+    display: block;
+  }
+
+  .fh-thumb::after { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to right, var(--surface), rgba(0,0,0,0) 12%, rgba(0,0,0,0) 88%, var(--surface)), linear-gradient(to bottom, var(--surface), rgba(0,0,0,0) 22%, rgba(0,0,0,0) 62%, var(--surface)); pointer-events: none; }
+
   .past-events {
     display: flex;
     flex-direction: column;
@@ -1077,6 +1097,7 @@
           return '<div class="future-hike-item">' +
             '<div class="fh-date"><span class="fh-month">' + monthAbbr(ev.date) + '</span><span class="fh-day">' + dayNum(ev.date) + '</span></div>' +
             '<div class="future-hike-info">' +
+            (ev.image ? '<div class="fh-thumb"><img src="' + ev.image + '" alt="' + ev.name + '"></div>' : '') +
             '<p class="fh-name">' + ev.name + (ev.category ? ' <span class="category-badge">' + ev.category + '</span>' : '') + '</p>' +
             '<p class="fh-loc">' + ev.location + '</p>' +
             '<p class="fh-desc">' + ev.description + '</p>' +
