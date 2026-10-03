@@ -859,14 +859,6 @@
         </span>
       </div>
 
-      <div class="rsvp-block">
-        <a class="rsvp-cta" id="rsvp-btn" href="#" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
-          <span class="rsvp-label">RSVP &middot; Join This Event</span>
-        </a>
-        <p class="rsvp-status" id="rsvp-status">Loading spots&hellip;</p>
-      </div>
-
       <p class="cal-heading" id="calendar">Add it to your calendar</p>
       <div class="cal-buttons">
         <a class="cal-btn primary" id="google-cal" href="#" target="_blank" rel="noopener">
@@ -970,7 +962,7 @@
     <p class="eyebrow">Coming Up</p>
     <h2>Upcoming Events</h2>
   </div>
-  <p class="small trail-guide-intro">Save the date &mdash; RSVP details go out on WhatsApp closer to each event.</p>
+  <p class="small trail-guide-intro">Save the date &mdash; details go out on WhatsApp closer to each event.</p>
 
   <div class="future-hikes" id="future-hikes-list"></div>
   <p id="no-future-message" class="small trail-guide-intro" hidden>No other events scheduled yet &mdash; check back soon!</p>
@@ -1006,14 +998,9 @@
         description: "2.8 mile walk &middot; estimated 1&ndash;2 hours",
         date: "2026-09-05",
         startTime: "10:00",
-        endTime: "12:00",
-        rsvp: {
-          formUrl: "https://tally.so/r/7RAlJP",
-          cap: 15,
-          sheetCsv: "https://docs.google.com/spreadsheets/d/14zDEAesEQIyVp03hsin6VG2aQialgdmrdJRfdiVbTFU/gviz/tq?tqx=out:csv&sheet=Sheet1"
-        }
+        endTime: "12:00"
       },
-  { id: "peters-canyon-hike", past: true, name: "Peters Canyon Hike", location: "Peters Canyon Regional Park", description: "6.3 mile hike &middot; advanced difficulty &mdash; dads-only pace, not suited for strollers or young kids.", date: "2026-10-03", startTime: "10:00", category: "Dads-Only / Advanced Hikes", image: "/peters-canyon-hike.jpg", rsvp: { formUrl: "https://tally.so/r/BzyXN4", cap: 10, sheetCsv: "https://docs.google.com/spreadsheets/d/14zDEAesEQIyVp03hsin6VG2aQialgdmrdJRfdiVbTFU/gviz/tq?tqx=out:csv&sheet=Peters+Canyon+Hike" } },
+  { id: "peters-canyon-hike", past: true, name: "Peters Canyon Hike", location: "Peters Canyon Regional Park", description: "6.3 mile hike &middot; advanced difficulty &mdash; dads-only pace, not suited for strollers or young kids.", date: "2026-10-03", startTime: "10:00", category: "Dads-Only / Advanced Hikes", image: "/peters-canyon-hike.jpg" },
       { id: "beach-walk", name: "Dads &amp; Kids Beach Walk", location: "Heisler Park, Laguna Beach", description: "Easy coastal walk + playground/beach time afterward.", date: "2026-10-18", startTime: "09:00" }, { id: "silverado-kids-corral", name: "Silverado Country Fair: Kids Corral", location: "Silverado Country Fair, 27641 Silverado Canyon Rd, Silverado", description: "Sat &amp; Sun, Oct 10&ndash;11 &mdash; gold mining, face painting, arts &amp; crafts, drum circle and puppets.", date: "2026-10-10", endDate: "2026-10-11", startTime: "11:30", image: "/image.png" },
       { id: "fall-picnic", name: "Fall Family Hike &amp; Picnic", location: "Irvine Regional Park area", description: "Easy morning outing followed by bring-your-own picnic.", date: "2026-11-07", startTime: "09:00" },
       { id: "halloween-walk", name: "Halloween Costume Walk &#127875;", location: "Oso Creek Trail", description: "Kids come in costumes; short walk followed by treats.", date: "2026-10-31", startTime: "08:00" },
@@ -1072,7 +1059,7 @@
 
     if (featured && !isWalkTalkFeatured && fallbackBlock) {
       var mapsHref = "https://maps.google.com/?q=" + encodeURIComponent(featured.location.replace(/&amp;/g, "&") + ", CA");
-      var fallbackRsvpHtml = featured.rsvp ? '<div class="rsvp-block"><a class="rsvp-cta" id="fallback-rsvp-btn" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg><span class="rsvp-label">RSVP &middot; Join This Event</span></a><p class="rsvp-status" id="fallback-rsvp-status">Loading spots&hellip;</p></div>' : '<p class="rsvp-status" style="margin-top:10px;">RSVP details go out on WhatsApp closer to this hike.</p>';
+      var fallbackRsvpHtml = '';
       fallbackBlock.innerHTML =
         (featured.image ? '<div class="upcoming-banner"><img src="' + featured.image + '" alt="' + featured.name + '"></div>' : '') + '<div class="upcoming-inner">' +
         '<p class="upcoming-name">' + featured.name + (featured.category ? ' <span class="category-badge">' + featured.category + '</span>' : '') + '</p>' +
@@ -1084,7 +1071,7 @@
         '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>Get directions</a></span></div>' +
         fallbackRsvpHtml +
         '</div>';
-      if (featured.rsvp) { var fallbackRsvpBtn = document.getElementById("fallback-rsvp-btn"); var fallbackRsvpLabel = fallbackRsvpBtn ? fallbackRsvpBtn.querySelector(".rsvp-label") : null; var fallbackRsvpStatus = document.getElementById("fallback-rsvp-status"); wireRsvp(fallbackRsvpBtn, fallbackRsvpLabel, fallbackRsvpStatus, featured.rsvp); }
+      
       
     }
 
@@ -1161,7 +1148,7 @@
       + "&body=" + encodeURIComponent(details);
     document.getElementById("outlook-cal").href = oUrl;
 
-    var rsvpBtn = document.getElementById("rsvp-btn"); var rsvpLabel = rsvpBtn.querySelector(".rsvp-label"); var rsvpStatus = document.getElementById("rsvp-status"); wireRsvp(rsvpBtn, rsvpLabel, rsvpStatus, featured.rsvp);
+    
 
     var copyText = title
       + "\nSaturday, September 5th, 10:00 AM (est. 1–2 hours)"
